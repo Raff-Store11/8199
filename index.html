@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DarkVPN UI</title>
+<style>
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at center, #0a0a0a, #000);
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  .vpn-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(0,255,255,0.1);
+    transition: 0.3s;
+  }
+  .vpn-status {
+    font-size: 1.3em;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+  }
+  .circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #0ff, #0099ff);
+    margin: 20px auto;
+    box-shadow: 0 0 30px rgba(0,255,255,0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #000;
+    transition: 0.4s;
+  }
+  .circle.off {
+    background: linear-gradient(145deg, #222, #111);
+    box-shadow: 0 0 15px rgba(255,0,0,0.2);
+    color: #888;
+  }
+  .vpn-btn {
+    margin-top: 20px;
+    background: linear-gradient(135deg, #00f0ff, #0066ff);
+    color: #fff;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 35px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  .vpn-btn:hover {
+    box-shadow: 0 0 15px #00f0ff;
+    transform: scale(1.05);
+  }
+</style>
+</head>
+<body>
+
+<div class="vpn-card">
+  <div class="vpn-status" id="vpnStatus">Status: Disconnected ❌</div>
+  <div class="circle off" id="vpnCircle">OFF</div>
+  <button class="vpn-btn" id="vpnButton">Connect VPN</button>
+</div>
+
+<script>
+  const statusText = document.getElementById("vpnStatus");
+  const circle = document.getElementById("vpnCircle");
+  const button = document.getElementById("vpnButton");
+
+  let connected = false;
+
+  button.addEventListener("click", () => {
+    connected = !connected;
+    if (connected) {
+      statusText.innerHTML = "Status: Connected ✅";
+      circle.classList.remove("off");
+      circle.textContent = "ON";
+      button.textContent = "Disconnect VPN";
+      document.body.style.background = "radial-gradient(circle at center, #002233, #000)";
+    } else {
+      statusText.innerHTML = "Status: Disconnected ❌";
+      circle.classList.add("off");
+      circle.textContent = "OFF";
+      button.textContent = "Connect VPN";
+      document.body.style.background = "radial-gradient(circle at center, #0a0a0a, #000)";
+    }
+  });
+</script>
+
+</body>
+</html>
